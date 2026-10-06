@@ -1,0 +1,15 @@
+# Static Pod Demo
+
+This folder shows how a pod can be run as a static pod in the `kube-system` namespace.
+
+## What it does
+
+The manifest is meant to be placed in the static pod directory on a node, usually `/etc/kubernetes/manifests`.
+
+Kubernetes watches that directory and launches the pod automatically without using the usual API-based deployment workflow.
+
+## Example purpose
+
+- run control-plane or node-level services
+- demonstrate static pod behavior
+- show how kubelet reads manifests from a configured directory

@@ -1,0 +1,15 @@
+# Toleration Demo
+
+This folder shows how a pod can tolerate a taint on a node.
+
+## What it does
+
+The pod includes a `tolerations` section that allows it to schedule onto a node tainted with `NoSchedule`.
+
+This is useful when a workload must run on a control-plane or specially tainted node even though the node is intentionally marked to reject most workloads.
+
+## Example purpose
+
+- keep the pod on a tainted node
+- allow control-plane scheduling for debugging or cluster services
+- demonstrate node affinity with tolerations

@@ -1,0 +1,17 @@
+Setting a taint on a Kubernetes worker node tells the scheduler to avoid placing pods there unless the pod tolerates that taint.
+
+This restricts deployments, because only workloads that match the taint's key/value and effect can be scheduled onto that node. Pods without a matching toleration will be rejected by the scheduler.
+
+Example:
+```
+kubectl taint node worker2 type=db:NoSchedule
+```
+
+Use a pod toleration if you want a workload to run on that node:
+```yaml
+tolerations:
+  - key: "type"
+    operator: "Equal"
+    value: "db"
+    effect: "NoSchedule"
+```

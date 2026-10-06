@@ -1,0 +1,15 @@
+# Network Policy Demo
+
+This folder shows how Kubernetes network policies restrict traffic between pods and namespaces.
+
+## What it does
+
+The policy allows inbound traffic only from pods in the `access` namespace or from pods with the label `access=true` on TCP port 80.
+
+This demonstrates how to isolate workloads and control which traffic is allowed into a namespace.
+
+## Example purpose
+
+- restrict pod-to-pod communication
+- allow only trusted namespaces to reach an app
+- demonstrate ingress filtering in Kubernetes

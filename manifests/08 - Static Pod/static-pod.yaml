@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: static-pod-demo
+  name: static-pod-demo
+  namespace: kube-system # static pods require the kube-system namespace
+spec:
+  containers:
+  - image: nginx
+    name: static-pod-demo
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+
+# manifest must exist at /etc/kubernetes/manifests on the desired node

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: compliant-pod
+  name: compliant-pod
+  namespace: limited
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: compliant-pod
+  template:
+    metadata:
+      labels:
+        app: compliant-pod
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          requests:
+            memory: 32Mi

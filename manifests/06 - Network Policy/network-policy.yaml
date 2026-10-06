@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: network-policy-demo
+  namespace: restricted # This policy is applied to the restricted namespace
+spec:
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: access # This policy allows ingress traffic from pods in the 'access' namespace
+    - podSelector:
+        matchLabels:
+          access: "true" # This policy allows ingress traffic from pods with the label 'access=true'
+    ports:
+    - protocol: TCP
+      port: 80 # This policy allows ingress traffic on TCP port 80

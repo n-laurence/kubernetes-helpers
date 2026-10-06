@@ -1,0 +1,15 @@
+# Resource Quota Demo
+
+This folder demonstrates Kubernetes resource limits for a namespace.
+
+## What it does
+
+The `ResourceQuota` restricts the total memory and number of pods allowed in the `limited` namespace.
+
+This prevents a namespace from consuming too many cluster resources.
+
+## Example purpose
+
+- enforce per-namespace limits
+- control pod count and memory usage
+- demonstrate quota-based governance

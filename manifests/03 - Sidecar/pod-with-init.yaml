@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sidecar-deployment
+  name: sidecar-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecar-deployment
+  template:
+    metadata:
+      labels:
+        app: sidecar-deployment
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      initContainers:
+      - name: init-sleep
+        image: busybox
+        command: ['sleep', '30']

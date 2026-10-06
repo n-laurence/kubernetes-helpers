@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: toleration-demo
+  name: toleration-demo
+spec:
+  containers:
+  - image: redis
+    name: toleration-demo
+  - image: nginx
+    name: nginxcontainer
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+# Pod is able to run on control plane due to the configured toleration

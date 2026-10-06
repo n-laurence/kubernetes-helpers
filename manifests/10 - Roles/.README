@@ -1,0 +1,29 @@
+# Kubernetes Roles and ServiceAccount Demo
+
+This folder demonstrates how Kubernetes Role-Based Access Control (RBAC) can be used to limit what a pod is allowed to do.
+
+## What this setup does
+
+- Creates a ServiceAccount named `limited-access-sa` in the `access` namespace.
+- Binds that ServiceAccount to a Role using a RoleBinding.
+- Runs a pod that uses that ServiceAccount so the workload inherits only the permissions granted by the Role.
+
+This is a least-privilege pattern: instead of giving a pod broad cluster permissions, only specific actions are allowed.
+
+## Files in this folder
+
+- `serviceaccount.yaml` – creates the ServiceAccount.
+- `rolebinding.yaml` – connects the ServiceAccount to a Role.
+- `pod-running-limited-sa.yaml` – runs a pod using the restricted ServiceAccount.
+
+## Apply the manifests
+
+```bash
+kubectl apply -f serviceaccount.yaml
+kubectl apply -f rolebinding.yaml
+kubectl apply -f pod-running-limited-sa.yaml
+```
+
+## Purpose
+
+This pattern is useful when you want a workload to access only limited Kubernetes resources, such as reading or updating specific objects in a namespace, without giving it admin-level access.

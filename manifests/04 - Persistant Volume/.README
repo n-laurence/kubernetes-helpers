@@ -1,0 +1,19 @@
+# Persistent Volume Demo
+
+This folder demonstrates a basic Kubernetes `PersistentVolume` resource.
+
+## What it does
+
+The manifest creates a persistent volume with:
+
+- a storage size of 1Gi
+- `ReadWriteOnce` access mode
+- a `hostPath` mount to a location on the node
+
+This is used to show how storage can be allocated and claimed by workloads in a cluster.
+
+## Example purpose
+
+- create a simple PV for local testing
+- understand volume lifecycle and storage binding
+- prepare for pod-to-volume usage in Kubernetes

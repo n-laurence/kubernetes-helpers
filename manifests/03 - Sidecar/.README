@@ -1,0 +1,18 @@
+# Sidecar / Init Container Demo
+
+This folder demonstrates a pod pattern that includes an init container before the main application container starts.
+
+## What it does
+
+The pod has:
+
+- a main container running an application
+- an init container that waits or prepares the environment before startup
+
+This is useful for startup ordering, dependency checks, or pre-run setup tasks.
+
+## Example purpose
+
+- delay container startup until setup is complete
+- run a setup routine before the real app starts
+- simulate initialization behavior in a small Kubernetes example
