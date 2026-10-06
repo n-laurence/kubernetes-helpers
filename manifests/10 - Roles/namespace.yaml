@@ -1,5 +1,4 @@
 apiVersion: v1
-kind: ServiceAccount
+kind: Namespace
 metadata:
-  name: limited-access-sa
-  namespace: access # This ServiceAccount is created in the 'access' namespace and can be used to grant specific permissions to pods running in that namespace.
+  name: access

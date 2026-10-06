@@ -1,29 +1,34 @@
-# Kubernetes Roles and ServiceAccount Demo
+# Kubernetes Role and ServiceAccount Demo
 
-This folder demonstrates how Kubernetes Role-Based Access Control (RBAC) can be used to limit what a pod is allowed to do.
+This folder demonstrates namespace-scoped Kubernetes Role-Based Access Control (RBAC) in the `access` namespace.
 
 ## What this setup does
 
-- Creates a ServiceAccount named `limited-access-sa` in the `access` namespace.
-- Binds that ServiceAccount to a Role using a RoleBinding.
-- Runs a pod that uses that ServiceAccount so the workload inherits only the permissions granted by the Role.
+- Creates the `access` namespace and a ServiceAccount named `limited-access-sa` in it.
+- Creates a Role named `role-binding-demo` that grants the `create` verb on pods and DaemonSets in the `access` namespace.
+- Binds the Role to `limited-access-sa` with a RoleBinding.
+- Creates a sample pod configured to use that ServiceAccount.
 
-This is a least-privilege pattern: instead of giving a pod broad cluster permissions, only specific actions are allowed.
+The Role does not grant read, update, or delete permissions, and it does not grant access outside the `access` namespace. The sample pod uses the ServiceAccount, but does not itself create pods or DaemonSets.
 
 ## Files in this folder
 
-- `serviceaccount.yaml` – creates the ServiceAccount.
-- `rolebinding.yaml` – connects the ServiceAccount to a Role.
-- `pod-running-limited-sa.yaml` – runs a pod using the restricted ServiceAccount.
+- `namespace.yaml` – creates the `access` namespace.
+- `serviceaccount.yaml` – creates the `limited-access-sa` ServiceAccount in that namespace.
+- `role.yaml` – creates the `role-binding-demo` Role with create-only permissions for pods and DaemonSets.
+- `rolebinding.yaml` – grants that Role to `limited-access-sa`.
+- `pod-running-limited-sa.yaml` – creates a sample pod using that ServiceAccount.
 
 ## Apply the manifests
 
 ```bash
+kubectl apply -f namespace.yaml
 kubectl apply -f serviceaccount.yaml
+kubectl apply -f role.yaml
 kubectl apply -f rolebinding.yaml
 kubectl apply -f pod-running-limited-sa.yaml
 ```
 
 ## Purpose
 
-This pattern is useful when you want a workload to access only limited Kubernetes resources, such as reading or updating specific objects in a namespace, without giving it admin-level access.
+This pattern demonstrates how to grant a workload's ServiceAccount narrowly scoped permissions to create specific resource types in one namespace, without granting those permissions cluster-wide.
